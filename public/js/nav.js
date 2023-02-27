@@ -37,8 +37,15 @@ const userPopup = document.querySelector(".login-logout-popup");
 const popuptext = document.querySelector(".account-info");
 const actionBtn = document.querySelector("#user-btn");
 
-userImageButton.addEventListener("click", () => {
+userImageButton.addEventListener("click", (event) => {
+  event.stopPropagation();
   userPopup.classList.toggle("hide");
+});
+
+window.addEventListener("click", (event) => {
+  if (!userPopup.contains(event.target)) {
+    userPopup.classList.add("hide");
+  }
 });
 
 window.onload = () => {
