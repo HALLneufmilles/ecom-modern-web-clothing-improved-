@@ -41,11 +41,12 @@ userImageButton.addEventListener("click", (event) => {
   event.stopPropagation();
   userPopup.classList.toggle("hide");
 });
-
+// https://chat.openai.com/chat/fa5687ce-fb34-464c-a072-408fd71c9af7
 window.addEventListener("click", (event) => {
-  if (!userPopup.contains(event.target)) {
-    userPopup.classList.add("hide");
-  }
+  // if (!userPopup.contains(event.target)) {
+  //   userPopup.classList.add("hide");
+  // }
+  userPopup.classList.add("hide");
 });
 
 window.onload = () => {
