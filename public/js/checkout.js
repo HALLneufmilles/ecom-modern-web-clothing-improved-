@@ -1,8 +1,9 @@
-// window.onload = () => {
-//     if(!sessionStorage.user){
-//         loaction.replace('/login');
-//     }
-// }
+// https://chat.openai.com/chat/5302a492-0415-4b2f-bfcc-4332ad660837
+window.addEventListener("load", () => {
+  if (!sessionStorage.user) {
+    location.replace("/login");
+  }
+});
 
 const placeOrderBtn = document.querySelector(".place-order-btn");
 placeOrderBtn.addEventListener("click", () => {
