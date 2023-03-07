@@ -50,7 +50,7 @@ const createProductCards = (data, parent) => {
   let start = '<div class="product-container">';
   let middle = ""; // this will contain card HTML
   let end = "</div>";
-
+  console.log(data);
   for (let i = 0; i < data.length; i++) {
     if (data[i].id != decodeURI(location.pathname.split("/").pop())) {
       middle += `
