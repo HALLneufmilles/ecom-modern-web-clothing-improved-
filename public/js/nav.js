@@ -87,8 +87,19 @@ window.onload = () => {
 
 const searchBtn = document.querySelector(".search-btn");
 const searchBox = document.querySelector(".search-box");
+// 😊
+//https://chat.openai.com/chat/b061d7f5-a1b4-408e-81c1-2374afc5f7fd#:~:text=bien%20sur%2C%20voici%20comment%20vous
+searchBox.addEventListener("keypress", (event) => {
+  if (searchBox.value.length && event.key === "Enter") {
+    event.preventDefault(); // Empêche l'envoi du formulaire
+    document.querySelector(".search-btn").click(); // Clique sur le bouton de recherche
+  }
+});
+
 searchBtn.addEventListener("click", () => {
+  console.log(searchBox.value);
   if (searchBox.value.length) {
-    location.href = `/search/${searchBox.value}`;
+    const searchValue = searchBox.value.toLowerCase();
+    location.href = `/search/${searchValue}`;
   }
 });

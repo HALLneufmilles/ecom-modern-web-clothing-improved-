@@ -97,7 +97,7 @@
 
 .size-radio-btn.uncheck {
   border: 2px solid red;
-  background-color: #ff7d7d;
+  box-shadow: 0 0 10px #f25c3a;
 }
 
 .size-radio-btn.check {

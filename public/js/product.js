@@ -112,10 +112,12 @@ const fetchProductData = () => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data.tags);
       setData(data);
-      getProducts(data.tags[1]).then((data) => createProductSlider(data, ".container-for-card-slider", "similar products"));
       loaderDiv.style.display = null;
+      getProducts(data.tags[1]).then((data) => createProductSlider(data, ".container-for-card-slider", "similar products"));
     })
+
     .catch((err) => {
       loaderDiv.style.display = null;
       location.replace("/404");

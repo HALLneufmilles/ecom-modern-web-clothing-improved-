@@ -185,7 +185,7 @@ app.post("/login", (req, res) => {
             const savedData = saved.data();
             // console.log("saveData: ", savedData);
             const { cart, wishlist } = savedData;
-            console.log("cart: ", cart);
+            // console.log("cart: ", cart);
             // console.log("cawishlistrt: ", wishlist);
             response.cart = cart;
             response.wishlist = wishlist;
@@ -310,7 +310,7 @@ app.post("/get-products", (req, res) => {
     } else {
       products.forEach((item) => {
         let data = item.data();
-        data.id = item.id;
+        // data.id = item.id;
         productArr.push(data);
       });
       res.json(productArr);
