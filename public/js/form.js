@@ -37,6 +37,7 @@ submitBtn.addEventListener("click", () => {
     } else {
       // submit form
       loader.style.display = "block";
+
       sendData("/signup", {
         name: name.value,
         email: email.value,
@@ -53,6 +54,7 @@ submitBtn.addEventListener("click", () => {
       showAlert("fill all the inputs");
     } else {
       loader.style.display = "block";
+
       sendData("/login", {
         email: email.value,
         password: password.value,

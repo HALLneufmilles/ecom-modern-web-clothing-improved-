@@ -1,5 +1,6 @@
 const productImages = document.querySelectorAll(".product-images img"); // selecting all image thumbs
 const productImageSlide = document.querySelector(".image-slider"); // seclecting image slider element
+const loaderDiv = document.querySelector(".loader-div");
 
 let activeImageSlide = 0; // default slider image
 
@@ -21,8 +22,14 @@ let checkedBtn = 0; // current selected button
 let size;
 
 sizeBtns.forEach((item, i) => {
+  loaderDiv.style.display = "block";
   // looping through each button
   item.addEventListener("click", () => {
+    for (let sizeBtn of sizeBtns) {
+      if (sizeBtn.classList.contains("uncheck")) {
+        sizeBtn.classList.remove("uncheck");
+      }
+    }
     // adding click event to each
     sizeBtns[checkedBtn].classList.remove("check"); // removing check class from the current button
     item.classList.add("check"); // adding check class to clicked button
@@ -72,13 +79,28 @@ const setData = (data) => {
   // wishlist and cart btn
   const wishlistBtn = document.querySelector(".wishlist-btn");
   wishlistBtn.addEventListener("click", () => {
-    wishlistBtn.innerHTML = add_product_to_cart_or_wishlist("wishlist", data);
+    if (checkedBtn != 0) {
+      wishlistBtn.innerHTML = add_product_to_cart_or_wishlist("wishlist", data);
+    } else {
+      addRedClass();
+    }
   });
 
   const cartBtn = document.querySelector(".cart-btn");
   cartBtn.addEventListener("click", () => {
-    cartBtn.innerHTML = add_product_to_cart_or_wishlist("cart", data);
+    console.log(checkedBtn);
+    if (checkedBtn != 0) {
+      cartBtn.innerHTML = add_product_to_cart_or_wishlist("cart", data);
+    } else {
+      addRedClass();
+    }
   });
+};
+
+const addRedClass = () => {
+  for (let sizeBtn of sizeBtns) {
+    sizeBtn.classList.add("uncheck");
+  }
 };
 
 // fetch data
@@ -90,10 +112,14 @@ const fetchProductData = () => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data.tags);
       setData(data);
+      loaderDiv.style.display = null;
       getProducts(data.tags[1]).then((data) => createProductSlider(data, ".container-for-card-slider", "similar products"));
     })
+
     .catch((err) => {
+      loaderDiv.style.display = null;
       location.replace("/404");
     });
 };
@@ -101,5 +127,6 @@ const fetchProductData = () => {
 let productId = null;
 if (location.pathname != "/products") {
   productId = decodeURI(location.pathname.split("/").pop());
+
   fetchProductData();
 }

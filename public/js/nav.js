@@ -37,8 +37,16 @@ const userPopup = document.querySelector(".login-logout-popup");
 const popuptext = document.querySelector(".account-info");
 const actionBtn = document.querySelector("#user-btn");
 
-userImageButton.addEventListener("click", () => {
+userImageButton.addEventListener("click", (event) => {
+  event.stopPropagation();
   userPopup.classList.toggle("hide");
+});
+// https://chat.openai.com/chat/fa5687ce-fb34-464c-a072-408fd71c9af7
+window.addEventListener("click", (event) => {
+  // if (!userPopup.contains(event.target)) {
+  //   userPopup.classList.add("hide");
+  // }
+  userPopup.classList.add("hide");
 });
 
 window.onload = () => {
@@ -79,8 +87,19 @@ window.onload = () => {
 
 const searchBtn = document.querySelector(".search-btn");
 const searchBox = document.querySelector(".search-box");
+// 😊
+//https://chat.openai.com/chat/b061d7f5-a1b4-408e-81c1-2374afc5f7fd#:~:text=bien%20sur%2C%20voici%20comment%20vous
+searchBox.addEventListener("keypress", (event) => {
+  if (searchBox.value.length && event.key === "Enter") {
+    event.preventDefault(); // Empêche l'envoi du formulaire
+    document.querySelector(".search-btn").click(); // Clique sur le bouton de recherche
+  }
+});
+
 searchBtn.addEventListener("click", () => {
+  console.log(searchBox.value);
   if (searchBox.value.length) {
-    location.href = `/search/${searchBox.value}`;
+    const searchValue = searchBox.value.toLowerCase();
+    location.href = `/search/${searchValue}`;
   }
 });
